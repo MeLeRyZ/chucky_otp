@@ -15,8 +15,8 @@ defmodule Chucky.MixProject do
   def application do
     [
       extra_applications: [:logger],
-                        mod: {Chucky, []}
-                        # fixes errors
+      mod: {Chucky, []}
+      # fixes errors
     ]
   end
 
