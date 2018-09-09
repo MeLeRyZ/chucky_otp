@@ -1,38 +1,37 @@
 defmodule Chucky.Server do
-    use GenServer
+  use GenServer
 
-    #######
-    # API #
-    #######
+  #######
+  # API #
+  #######
 
-    def start_link do
-        GenServer.start_link(__MODULE__,
-                             [],
-                             [name: {:global, __MODULE__}])
-    end
+  def start_link do
+    GenServer.start_link(__MODULE__, [], [name: {:global, __MODULE__}])
+  end
 
-    def fact do
+  def fact do
     GenServer.call({:global, __MODULE__}, :fact)
-    end
+  end
 
-    #############
-    # Callbacks #
-    #############
+  #############
+  # Callbacks #
+  #############
 
-    def init([]) do
-        :random.seed(:os.timestamp())
-        facts = "facts.txt"
-                |> File.read
-                |> String.split("\n")
-        {:ok, facts}
-    end
+  def init([]) do
+    :random.seed(:os.timestamp)
+    facts = "facts.txt"
+             |> File.read!
+             |> String.split("\n")
 
-    def handle_call(:fact, _from, facts) do # facts == state
-        random_fact = facts
-                    |> Enum.shuffle
-                    |> List.first
-        {:reply, random_fact, facts}
-    end
+    {:ok, facts}
+  end
 
+  def handle_call(:fact, _from, facts) do
+    random_fact = facts
+                  |> Enum.shuffle
+                  |> List.first
+
+    {:reply, random_fact, facts}
+  end
 
 end

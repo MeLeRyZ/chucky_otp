@@ -33,7 +33,7 @@ Here's an example:
 
 ## Step 4: Run it!
 
-Open 3 different terminals, and on each of them, run these commands:
+Open 3 different terminals(in 30 secs!), and on each of them, run these commands:
 
 ```
 % iex --sname a -pa _build/dev/lib/chucky/ebin --app chucky --erl "-config config/a.config"
